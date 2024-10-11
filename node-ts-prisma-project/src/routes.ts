@@ -1,6 +1,7 @@
 import {Router} from 'express';
 import {getUserController, alterUserController, createUserController} from './controllers/UserController';
 import { createTipoAtivoController } from './controllers/tipoAtivoController';
+import { createAtivoController } from './controllers/ativoController';
 
 const routes = Router();
 
