@@ -11,14 +11,16 @@ model tb_user {
   id_user     Int           @id(map: "tb_user_id") @default(autoincrement())
   nome        String        @db.VarChar(20)
   email       String        @db.VarChar(50)
-  senha       String        @db.VarChar(50)
+  senha       String        @db.VarChar(100)
   tb_carteira tb_carteira[]
 }
 
 model tb_ativos {
-  id_ativo   Int    @id(map: "tb_ativos_id_ativo")
-  cod_ativo  String @db.VarChar(10)
-  nome_ativo String @db.VarChar(50)
+  id_ativo      Int           @id(map: "tb_ativos_id_ativo")
+  cod_ativo     String        @db.VarChar(10)
+  nome_ativo    String        @db.VarChar(50)
+  id_tipo_ativo Int
+  tb_tipo_ativo tb_tipo_ativo @relation(fields: [id_tipo_ativo], references: [id_tipo_ativo], onDelete: NoAction, onUpdate: NoAction, map: "tb_ativos_id_tipo_fk")
 }
 
 model tb_carteira {
@@ -36,4 +38,10 @@ model tb_carteira_ativos {
   dy               Float?
 
   @@id([id_carteira, id_ativos], map: "tb_carteira_ativos_id_carteira_ativos")
+}
+
+model tb_tipo_ativo {
+  id_tipo_ativo   Int         @id(map: "tb_tipo_ativo_id")
+  desc_tipo_ativo String      @db.Char(80)
+  tb_ativos       tb_ativos[]
 }
