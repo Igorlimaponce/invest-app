@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model tb_user {
+  id_user     Int           @id(map: "tb_user_id") @default(autoincrement())
+  nome        String        @db.VarChar(20)
+  email       String        @db.VarChar(50)
+  senha       String        @db.VarChar(50)
+  tb_carteira tb_carteira[]
+}
+
+model tb_ativos {
+  id_ativo   Int    @id(map: "tb_ativos_id_ativo")
+  cod_ativo  String @db.VarChar(10)
+  nome_ativo String @db.VarChar(50)
+}
+
+model tb_carteira {
+  id_carteira   Int      @id(map: "tb_carteira_id_carteira")
+  id_user       Int?
+  desc_carteira String   @db.VarChar(50)
+  tb_user       tb_user? @relation(fields: [id_user], references: [id_user], onDelete: NoAction, onUpdate: NoAction, map: "tb_carteira_id_user")
+}
+
+model tb_carteira_ativos {
+  id_carteira      Int
+  id_ativos        Int
+  quantidade_ativo Int
+  preco_medio      Float?
+  dy               Float?
+
+  @@id([id_carteira, id_ativos], map: "tb_carteira_ativos_id_carteira_ativos")
+}
