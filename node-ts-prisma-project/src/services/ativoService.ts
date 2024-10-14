@@ -21,3 +21,15 @@ export const createAtivo = async(input:CreateAtivoInput) =>{
     }
 
 }
+
+export const getAtivoById = async(cod_ativo: number) =>{
+    try{
+        const ativo = await prisma.tb_ativos.findUnique({
+            Where: cod_ativo = cod_ativo
+        })
+        return ativo
+    }catch(error:any){
+        throw new Error("Erro ao buscar ativo")
+    }
+
+}
