@@ -15,4 +15,6 @@ export const createUser = async (data:any, p0?: {onSuccess: () => void;}) => {
 
 export const alterUser = async (id:number, data:any) => {
     const response = await api.put(`/usuarios/alter/`)
+
+    return response
 }

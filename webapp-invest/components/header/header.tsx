@@ -54,3 +54,6 @@ const Header = ({nav,message}: {nav:Route[],message:string}) => {
         </header>
     )
 }
+
+
+export default Header;
